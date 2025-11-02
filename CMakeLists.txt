@@ -20,10 +20,10 @@ endif ()
 ## Project Options
 option(BUILD_TESTING "Build tests" OFF)
 option(STATIC_CHECK "Enable static check" OFF)
+option(XMOTION_DEV_MODE "Development mode forces building tests" OFF)
 
 option(ENABLE_LOGGING "Enable logging" ON)
-option(USE_SYS_SPDLOG "Use system spdlog" OFF)
-option(XMOTION_DEV_MODE "Development mode forces building tests" OFF)
+option(USE_SYS_SPDLOG "Use system spdlog" ON)
 
 if (DEFINED ENV{ROS_DISTRO} AND "$ENV{ROS_DISTRO}" STREQUAL "humble")
   message(STATUS "ROS_DISTRO is $ENV{ROS_DISTRO}, use system spdlog")
