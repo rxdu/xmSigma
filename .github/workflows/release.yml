@@ -208,20 +208,18 @@ jobs:
           aptlycli snapshot create "$SNAPSHOT_NAME" "$dist" \
             --description="xmotion-core ${{ env.VERSION }} for $dist"
 
-          # Drop existing published repository if it exists
-          echo ""
-          if aptlycli publish list | grep -q "Distribution: $dist"; then
-            echo "Dropping existing published repository '$dist'..."
-            aptlycli publish drop "$dist" --force
-          fi
-
-          # Publish the snapshot
+          # Publish: try switch first (atomic update), fallback to fresh publish
           echo ""
           echo "Publishing snapshot '$SNAPSHOT_NAME'..."
-          aptlycli publish snapshot "$SNAPSHOT_NAME" \
-            --distribution="$dist" \
-            --component="main" \
-            --architectures="amd64,arm64"
+          if aptlycli publish switch "$dist" "$SNAPSHOT_NAME"; then
+            echo "✓ Successfully switched published repository to '$SNAPSHOT_NAME'"
+          else
+            echo "No existing publish found, creating fresh publish..."
+            aptlycli publish snapshot "$SNAPSHOT_NAME" \
+              --distribution="$dist" \
+              --component="main" \
+              --architectures="amd64,arm64"
+          fi
 
           # Clean up upload directory
           echo ""
