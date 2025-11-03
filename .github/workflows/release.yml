@@ -140,10 +140,13 @@ jobs:
 
     - name: Install aptlycli
       run: |
-        echo "Installing aptlycli for package publishing"
-        wget -q https://github.com/rxdu/aptly_api_cli/releases/latest/download/aptlycli-linux-amd64
-        chmod +x aptlycli-linux-amd64
-        sudo mv aptlycli-linux-amd64 /usr/local/bin/aptlycli
+        sudo apt-get update && sudo apt-get install -y curl lsb-release
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://apt.rdu.im/gpg.key | sudo tee /etc/apt/keyrings/rdu-apt.asc > /dev/null
+        echo "deb [signed-by=/etc/apt/keyrings/rdu-apt.asc] https://apt.rdu.im/$(lsb_release -cs) $(lsb_release -cs) main" |
+        sudo tee /etc/apt/sources.list.d/apt-rdu.list
+        sudo apt update
+        sudo apt install aptlycli
         aptlycli version || echo "aptlycli installed"
 
     - name: Publish to Aptly repositories
