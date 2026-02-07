@@ -11,22 +11,23 @@
 
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include <ctime>
 
 namespace xmotion {
-CtrlLogger::CtrlLogger(std::string logfile_prefix, std::string logfile_path) :
-    SpecializedLogger(logfile_prefix, logfile_path),
-    head_added_(false),
-    item_counter_(0) {
-}
+CtrlLogger::CtrlLogger(const std::string &logfile_prefix,
+                       const std::string &logfile_path)
+    : SpecializedLogger(logfile_prefix, logfile_path),
+      head_added_(false),
+      item_counter_(0) {}
 
-CtrlLogger &CtrlLogger::GetLogger(std::string logfile_prefix, std::string logfile_path) {
+CtrlLogger &CtrlLogger::GetLogger(const std::string &logfile_prefix,
+                                  const std::string &logfile_path) {
   static CtrlLogger instance(logfile_prefix, logfile_path);
-
   return instance;
 }
 
-void CtrlLogger::AddItemNameToEntryHead(std::string name) {
+void CtrlLogger::AddItemNameToEntryHead(const std::string &name) {
   auto it = entry_ids_.find(name);
 
   if (it == entry_ids_.end()) {
@@ -35,9 +36,11 @@ void CtrlLogger::AddItemNameToEntryHead(std::string name) {
   }
 }
 
-void CtrlLogger::AddItemDataToEntry(std::string item_name, std::string data_str) {
+void CtrlLogger::AddItemDataToEntry(const std::string &item_name,
+                                    const std::string &data_str) {
   if (!head_added_) {
-    std::cerr << "No heading for log entries has been added, data ignored!" << std::endl;
+    std::cerr << "No heading for log entries has been added, data ignored!"
+              << std::endl;
     return;
   }
 
@@ -49,21 +52,30 @@ void CtrlLogger::AddItemDataToEntry(std::string item_name, std::string data_str)
     std::cerr << "Failed to find data entry!" << std::endl;
 }
 
-// adding data using id is faster than using the name, validity of id is not checked
-//	in this function.
-void CtrlLogger::AddItemDataToEntry(uint64_t item_id, std::string data_str) {
+// adding data using id is faster than using the name
+void CtrlLogger::AddItemDataToEntry(uint64_t item_id,
+                                    const std::string &data_str) {
   if (!head_added_)
     return;
+
+  if (item_id >= item_counter_) {
+    std::cerr << "Invalid item ID: " << item_id << " (max: " << item_counter_ - 1 << ")" << std::endl;
+    return;
+  }
 
   item_data_[item_id] = data_str;
 }
 
-void CtrlLogger::AddItemDataToEntry(std::string item_name, double data) {
-  AddItemDataToEntry(item_name, std::to_string(data));
+void CtrlLogger::AddItemDataToEntry(const std::string &item_name, double data) {
+  std::ostringstream oss;
+  oss << std::setprecision(15) << data;
+  AddItemDataToEntry(item_name, oss.str());
 }
 
 void CtrlLogger::AddItemDataToEntry(uint64_t item_id, double data) {
-  AddItemDataToEntry(item_id, std::to_string(data));
+  std::ostringstream oss;
+  oss << std::setprecision(15) << data;
+  AddItemDataToEntry(item_id, oss.str());
 }
 
 void CtrlLogger::PassEntryHeaderToLogger() {

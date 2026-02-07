@@ -27,12 +27,16 @@ struct ImuData {
   uint32_t timestamp;
 };
 
+/// @brief Interface for IMU (Inertial Measurement Unit) devices.
+/// @note Thread-safety: The callback_ member is NOT protected by a mutex.
+/// If SetCallback() may be called concurrently with callback invocation,
+/// the implementation must provide external synchronization.
 class ImuInterface {
  public:
   virtual ~ImuInterface() = default;
 
-  virtual bool Connect(std::string dev_name) = 0;
-  virtual bool Connect(std::string dev_name, uint32_t baud_rate) = 0;
+  virtual bool Connect(const std::string &dev_name) = 0;
+  virtual bool Connect(const std::string &dev_name, uint32_t baud_rate) = 0;
 
   virtual void Disconnect() = 0;
   virtual bool IsConnected() = 0;

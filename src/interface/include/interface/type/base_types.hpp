@@ -7,8 +7,8 @@
  * Copyright (c) 2021 Ruixiang Du (rdu)
  */
 
-#ifndef TYPES_HPP
-#define TYPES_HPP
+#ifndef XMOTION_BASE_TYPES_HPP
+#define XMOTION_BASE_TYPES_HPP
 
 #include <cstdint>
 #include <chrono>
@@ -41,4 +41,4 @@ using RSTimePoint = std::chrono::time_point<RSClock>;
 using RSEnumBaseType = uint32_t;
 }  // namespace xmotion
 
-#endif /* TYPES_HPP */
+#endif  // XMOTION_BASE_TYPES_HPP

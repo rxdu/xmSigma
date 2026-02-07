@@ -29,12 +29,21 @@ class RcReceiverInterface {
   virtual bool IsOpened() const = 0;
 
   /// @brief Scale the channel value to [-1, 1]
+  /// @param value The raw channel value
+  /// @param min The minimum calibration value
+  /// @param neutral The neutral/center calibration value
+  /// @param max The maximum calibration value
+  /// @return Scaled value in range [-1, 1], or 0 if calibration is invalid
   static float ScaleChannelValue(float value, float min, float neutral,
                                  float max) {
     if (value < neutral) {
-      return (value - neutral) / (neutral - min);
+      float divisor = neutral - min;
+      if (divisor == 0.0f) return 0.0f;
+      return (value - neutral) / divisor;
     } else {
-      return (value - neutral) / (max - neutral);
+      float divisor = max - neutral;
+      if (divisor == 0.0f) return 0.0f;
+      return (value - neutral) / divisor;
     }
   }
 

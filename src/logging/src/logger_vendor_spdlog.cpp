@@ -55,9 +55,9 @@ LogLevel FromSpdlogLevel(spdlog::level::level_enum level) {
 }
 }  // namespace
 
-void LoggerVendorSpdlog::Initialize(std::string logger_name,
-                                    std::string pattern,
-                                    std::string file_suffix) {
+void LoggerVendorSpdlog::Initialize(const std::string &logger_name,
+                                    const std::string &pattern,
+                                    const std::string &file_suffix) {
   // handle log level
   spdlog::level::level_enum log_level = ToSpdlogLevel(default_log_level);
   if (!GetEnvironmentVariable(log_level_env_var_name).empty()) {

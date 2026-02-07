@@ -21,6 +21,9 @@ std::string GetEnvironmentVariable(const std::string &variableName);
 
 inline std::string GetDefaultRootPath() {
   char *home_path = std::getenv("HOME");
+  if (home_path == nullptr) {
+    return "/tmp/.xmotion";
+  }
   std::string hm(home_path);
   return hm + "/.xmotion";
 }
@@ -33,21 +36,24 @@ inline std::string GetDefaultLogPath() {
 
 // reference:
 // https://stackoverflow.com/questions/22318389/pass-system-date-and-time-as-a-filename-in-c
-inline std::string CreateLogNameWithFullPath(std::string prefix,
-                                             std::string suffix) {
+inline std::string CreateLogNameWithFullPath(const std::string &prefix,
+                                             const std::string &suffix) {
   time_t t = time(0);  // get time now
   struct tm *now = localtime(&t);
+  if (now == nullptr) {
+    return GetDefaultLogPath() + "/" + prefix + "-unknown" + suffix;
+  }
 
-  char buffer[80];
-  strftime(buffer, 80, "%Y%m%d-%H%M%S", now);
+  constexpr size_t kBufferSize = 32;
+  char buffer[kBufferSize];
+  strftime(buffer, kBufferSize, "%Y%m%d-%H%M%S", now);
   std::string time_stamp(buffer);
 
-  strftime(buffer, 80, "%Y%m%d", now);
+  strftime(buffer, kBufferSize, "%Y%m%d", now);
   std::string subfolder(buffer);
 
-  std::string filename = GetDefaultLogPath() + "/" + subfolder + "/" + prefix +
-                         "-" + time_stamp + suffix;
-  return filename;
+  return GetDefaultLogPath() + "/" + subfolder + "/" + prefix + "-" +
+         time_stamp + suffix;
 }
 
 #if defined(_WIN32) || defined(_WIN64)

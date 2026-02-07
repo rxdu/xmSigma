@@ -1,49 +1,47 @@
-/* 
+/*
  * logging_utils.hpp
- * 
+ *
  * Created on: Dec 28, 2018 11:30
- * Description: 
- * 
+ * Description:
+ *
  * Copyright (c) 2018 Ruixiang Du (rdu)
  */
 
-#ifndef LOGGING_UTILS_HPP
-#define LOGGING_UTILS_HPP
+#ifndef XMOTION_LOGGING_UTILS_HPP
+#define XMOTION_LOGGING_UTILS_HPP
 
 #include <cstdlib>
+#include <ctime>
 #include <string>
 
 namespace xmotion {
 inline std::string GetProjectRootPath() {
-  char *home_path;
-  home_path = std::getenv("HOME");
-  std::string log_path;
-  if (home_path != NULL) {
-    std::string hm(home_path);
-    log_path = hm + "/.xmotion";
-  } else {
-    // default path
-    log_path = "/home/rdu/.xmotion";
+  char *home_path = std::getenv("HOME");
+  if (home_path == nullptr) {
+    return "/tmp/.xmotion";
   }
-  return log_path;
+  return std::string(home_path) + "/.xmotion";
 }
 
-inline std::string GetLogFolderPath() {
-  return GetProjectRootPath() + "/log";
-}
+inline std::string GetLogFolderPath() { return GetProjectRootPath() + "/log"; }
 
-// reference: https://stackoverflow.com/questions/22318389/pass-system-date-and-time-as-a-filename-in-c
-inline std::string CreateLogFileName(std::string prefix, std::string path) {
-  time_t t = time(0); // get time now
+// reference:
+// https://stackoverflow.com/questions/22318389/pass-system-date-and-time-as-a-filename-in-c
+inline std::string CreateLogFileName(const std::string &prefix,
+                                      const std::string &path) {
+  time_t t = time(0);  // get time now
   struct tm *now = localtime(&t);
+  if (now == nullptr) {
+    return path + "/" + prefix + ".unknown.csv";
+  }
 
-  char buffer[80];
-  strftime(buffer, 80, "%Y%m%d%H%M%S", now);
+  constexpr size_t kBufferSize = 32;
+  char buffer[kBufferSize];
+  strftime(buffer, kBufferSize, "%Y%m%d%H%M%S", now);
   std::string time_stamp(buffer);
 
-  std::string filename = path + "/" + prefix + "." + time_stamp + ".csv";
-  return filename;
+  return path + "/" + prefix + "." + time_stamp + ".csv";
 }
-} // namespace xmotion
+}  // namespace xmotion
 
-#endif /* LOGGING_UTILS_HPP */
+#endif  // XMOTION_LOGGING_UTILS_HPP

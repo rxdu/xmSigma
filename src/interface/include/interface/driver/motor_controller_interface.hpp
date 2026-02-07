@@ -24,45 +24,41 @@ class MotorControllerInterface {
 
   virtual void SetPosition(float position) {
     throw std::runtime_error("SetPosition not implemented");
-  };
+  }
 
   virtual void SetTorque(float torque) {
     throw std::runtime_error("SetTorque not implemented");
-  };
+  }
 
   virtual void SetCurrent(float current) {
     throw std::runtime_error("SetCurrent not implemented");
-  };
+  }
 
   virtual float GetSpeed() = 0;
 
   virtual float GetPosition() {
     throw std::runtime_error("GetPosition not implemented");
-    return 0;
-  };
+  }
 
   virtual float GetTorque() {
     throw std::runtime_error("GetTorque not implemented");
-    return 0;
-  };
+  }
 
   virtual float GetCurrent() {
     throw std::runtime_error("GetCurrent not implemented");
-    return 0;
-  };
+  }
 
   virtual void ApplyBrake(float brake) {
     throw std::runtime_error("ApplyBrake not implemented");
-  };
+  }
 
   virtual void ReleaseBrake() {
     throw std::runtime_error("ReleaseBrake not implemented");
-  };
+  }
 
   virtual bool IsNormal() {
     throw std::runtime_error("IsNormal not implemented");
-    return true;
-  };
+  }
 };
 }  // namespace xmotion
 

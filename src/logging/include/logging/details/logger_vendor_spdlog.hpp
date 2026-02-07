@@ -26,8 +26,8 @@ class LoggerVendorSpdlog : public LoggerInterface {
   virtual ~LoggerVendorSpdlog() = default;
 
   // public methods
-  void Initialize(std::string logger_name, std::string pattern,
-                  std::string file_suffix) override;
+  void Initialize(const std::string &logger_name, const std::string &pattern,
+                  const std::string &file_suffix) override;
   void Terminate() override;
 
   void SetLoggerLevel(LogLevel level) override;

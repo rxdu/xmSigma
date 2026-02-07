@@ -15,25 +15,28 @@
 #include <functional>
 
 namespace xmotion {
+/// @brief Generic interface for sensor devices.
+/// @tparam T The data type returned by the sensor
+/// @note Thread-safety: The callback_ member is NOT protected by a mutex.
+/// If SetDataReceivedCallback() may be called concurrently with callback
+/// invocation, the implementation must provide external synchronization.
 template <typename T>
 class SensorInterface {
  public:
   virtual ~SensorInterface() = default;
 
-  virtual bool Connect(std::string dev_name) {
+  virtual bool Connect(const std::string &dev_name) {
     throw std::runtime_error(
         "The CAN interface is not implemented by the sensor. You also need to "
         "specify the baudrate if UART interface is intended to be used.");
-    return false;
-  };
+  }
 
-  virtual bool Connect(std::string dev_name, uint32_t baud_rate) {
+  virtual bool Connect(const std::string &dev_name, uint32_t baud_rate) {
     throw std::runtime_error(
         "The UART interface is not implemented by the sensor.");
-    return false;
-  };
+  }
 
-  virtual void Disconnect() {};
+  virtual void Disconnect() {}
 
   virtual bool IsOkay() = 0;
 

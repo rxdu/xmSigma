@@ -21,17 +21,25 @@
 #include "logging/details/specialized_logger.hpp"
 
 namespace xmotion {
+/// @brief A specialized logger for control data logging to CSV format.
+/// @note Thread-safety: This class uses a singleton pattern. The first call to
+/// GetLogger() determines the log file path for the entire application lifetime.
+/// Subsequent calls with different parameters will NOT change the log path.
+/// The logging methods are NOT thread-safe; if multiple threads need to log,
+/// external synchronization is required.
 class CtrlLogger : public SpecializedLogger {
  public:
-  static CtrlLogger &GetLogger(std::string logfile_prefix = "", std::string logfile_path = "");
+  static CtrlLogger &GetLogger(const std::string &logfile_prefix = "",
+                               const std::string &logfile_path = "");
 
   // basic functions
-  void AddItemNameToEntryHead(std::string name);
-  void AddItemDataToEntry(std::string item_name, std::string data_str);
-  void AddItemDataToEntry(uint64_t item_id, std::string data_str);
+  void AddItemNameToEntryHead(const std::string &name);
+  void AddItemDataToEntry(const std::string &item_name,
+                          const std::string &data_str);
+  void AddItemDataToEntry(uint64_t item_id, const std::string &data_str);
 
   // extra helper functions
-  void AddItemDataToEntry(std::string item_name, double data);
+  void AddItemDataToEntry(const std::string &item_name, double data);
   void AddItemDataToEntry(uint64_t item_id, double data);
 
   // functions that invoke logger calls
@@ -45,7 +53,8 @@ class CtrlLogger : public SpecializedLogger {
   std::atomic<uint64_t> item_counter_;
   std::vector<std::string> item_data_;
 
-  CtrlLogger(std::string log_name_prefix, std::string log_save_path);
+  CtrlLogger(const std::string &log_name_prefix,
+             const std::string &log_save_path);
 
   // non-copyable
   CtrlLogger(const CtrlLogger &) = delete;

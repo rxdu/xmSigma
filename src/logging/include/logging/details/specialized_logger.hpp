@@ -22,13 +22,14 @@ namespace xmotion {
 class SpecializedLogger {
  public:
   SpecializedLogger() = delete;
-  SpecializedLogger(std::string logfile_prefix, std::string logfile_path) : logfile_prefix_(logfile_prefix),
-                                                                            logfile_path_(logfile_path) {
+  SpecializedLogger(const std::string &logfile_prefix,
+                    const std::string &logfile_path)
+      : logfile_prefix_(logfile_prefix), logfile_path_(logfile_path) {
 #ifdef ENABLE_LOGGING
     // initialize logger
     std::string filename = CreateLogFileName(logfile_prefix_, logfile_path_);
-//        spdlog::installCrashHandlerOnce();
-    logger_ = spdlog::basic_logger_mt<spdlog::async_factory>(filename, filename);
+    logger_ =
+        spdlog::basic_logger_mt<spdlog::async_factory>(filename, filename);
     logger_->set_pattern("%v");
 #endif
   }
