@@ -37,7 +37,7 @@ else ()
 endif ()
 
 install(TARGETS ${libs}
-    EXPORT xmotion-coreTargets
+    EXPORT xmSigmaTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin

@@ -8,7 +8,7 @@ target_include_directories(interface INTERFACE
 
 ## installation configuration
 install(TARGETS interface
-    EXPORT xmotion-coreTargets
+    EXPORT xmSigmaTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin

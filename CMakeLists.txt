@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.2)
-project(xmotion-core VERSION 0.1.0)
+project(xmSigma VERSION 0.1.0)
 
 message(STATUS "------------------------------------------------")
 if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
@@ -107,6 +107,16 @@ add_subdirectory(third_party)
 ## Add source directories
 add_subdirectory(src)
 
+## Family-convention targets: namespaced aliases (so add_subdirectory consumers
+## see the same xmotion:: targets as find_package consumers) plus an aggregate
+## xmotion::xmSigma that pulls in the whole foundation.
+add_library(xmotion::interface ALIAS interface)
+add_library(xmotion::logging ALIAS logging)
+add_library(xmSigma INTERFACE)
+target_link_libraries(xmSigma INTERFACE interface logging)
+add_library(xmotion::xmSigma ALIAS xmSigma)
+install(TARGETS xmSigma EXPORT xmSigmaTargets)
+
 ## Installation setup
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
@@ -130,19 +140,19 @@ endforeach ()
 # export target configuration
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-    xmotion-coreConfigVersion.cmake
+    xmSigmaConfigVersion.cmake
     VERSION "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}"
     COMPATIBILITY SameMajorVersion)
 
-install(EXPORT xmotion-coreTargets
-    FILE xmotion-coreTargets.cmake
+install(EXPORT xmSigmaTargets
+    FILE xmSigmaTargets.cmake
     NAMESPACE xmotion::
-    DESTINATION lib/cmake/xmotion)
+    DESTINATION lib/cmake/xmSigma)
 
-configure_file(cmake/xmotion-coreConfig.cmake.in xmotion-coreConfig.cmake @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/xmotion-coreConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/xmotion-coreConfigVersion.cmake"
-    DESTINATION lib/cmake/xmotion)
+configure_file(cmake/xmSigmaConfig.cmake.in xmSigmaConfig.cmake @ONLY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/xmSigmaConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/xmSigmaConfigVersion.cmake"
+    DESTINATION lib/cmake/xmSigma)
 
 # Packaging support
 set(CPACK_DEBIAN_PACKAGE_NAME "libxmotion-core")
