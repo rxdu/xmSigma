@@ -108,16 +108,6 @@ add_subdirectory(third_party)
 ## Add source directories
 add_subdirectory(src)
 
-## Family-convention targets: namespaced aliases (so add_subdirectory consumers
-## see the same xmotion:: targets as find_package consumers) plus an aggregate
-## xmotion::xmSigma that pulls in the whole foundation.
-add_library(xmotion::interface ALIAS interface)
-add_library(xmotion::logging ALIAS logging)
-add_library(xmSigma INTERFACE)
-target_link_libraries(xmSigma INTERFACE interface logging)
-add_library(xmotion::xmSigma ALIAS xmSigma)
-install(TARGETS xmSigma EXPORT xmSigmaTargets)
-
 ## Installation setup
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Installation directory for libraries")
