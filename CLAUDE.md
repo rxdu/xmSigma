@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-xmotion-core is a C++ library for robot motion planning and control. It provides:
+xmSigma is the foundation library of the xMotion family — the shared substrate the other components build on. It provides:
 - **Interface definitions**: Hardware driver interfaces (motors, sensors, CAN, serial, etc.) and control interfaces
 - **Logging utilities**: spdlog-based logging system with environment variable configuration
 - **Type definitions**: Common geometry and trajectory types for robotics applications
@@ -182,9 +182,9 @@ cpack
 ```
 
 Package details:
-- Package name: libxmotion-core
+- Package name: libxmotion-sigma
 - Default install prefix: /opt/xmotion
-- Exports CMake targets as `xmotion::interface` and `xmotion::logging`
+- Exports CMake targets as `xmotion::interface`, `xmotion::logging`, and the aggregate `xmotion::xmSigma` (via `find_package(xmSigma)`)
 - Includes CMake config files for find_package() support
 
 ## ROS Integration
