@@ -7,8 +7,7 @@
  * Copyright (c) 2023 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_CAN_INTERFACE_HPP
-#define XMOTION_CAN_INTERFACE_HPP
+#pragma once
 
 #include <linux/can.h>
 
@@ -33,4 +32,3 @@ class CanInterface {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_CAN_INTERFACE_HPP

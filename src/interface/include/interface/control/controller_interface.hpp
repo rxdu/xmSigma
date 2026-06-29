@@ -7,8 +7,7 @@
  * Copyright (c) 2022 Ruixiang Du (rdu)
  */
 
-#ifndef ROBOSW_SRC_INTERFACE_INCLUDE_INTERFACE_CONTROLLER_INTERFACE_HPP
-#define ROBOSW_SRC_INTERFACE_INCLUDE_INTERFACE_CONTROLLER_INTERFACE_HPP
+#pragma once
 
 namespace xmotion {
 template<typename State, typename Output>
@@ -18,4 +17,3 @@ class ControllerInterface {
 };
 }
 
-#endif //ROBOSW_SRC_INTERFACE_INCLUDE_INTERFACE_CONTROLLER_INTERFACE_HPP

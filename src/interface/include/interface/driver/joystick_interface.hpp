@@ -7,8 +7,7 @@
  * Copyright (c) 2023 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_JOYSTICK_INTERFACE_HPP
-#define XMOTION_JOYSTICK_INTERFACE_HPP
+#pragma once
 
 #include <string>
 #include <functional>
@@ -120,4 +119,3 @@ class JoystickInterface {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_JOYSTICK_INTERFACE_HPP

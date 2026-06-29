@@ -7,8 +7,7 @@
  * Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_MODBUS_RTU_CLIENT_HPP_
-#define XMOTION_MODBUS_RTU_CLIENT_HPP_
+#pragma once
 
 #include <cstdint>
 #include <memory>
@@ -33,4 +32,3 @@ class ModbusRtuClient {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_MODBUS_RTU_CLIENT_HPP_

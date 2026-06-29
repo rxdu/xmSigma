@@ -5,8 +5,7 @@
  *
  * @copyright Copyright (c) 2024 Ruixiang Du (rdu)
  */
-#ifndef RC_RECEIVER_INTERFACE_HPP
-#define RC_RECEIVER_INTERFACE_HPP
+#pragma once
 
 #include "interface/type/base_types.hpp"
 
@@ -44,4 +43,3 @@ class RcReceiverInterface {
 };
 }  // namespace xmotion
 
-#endif  // RC_RECEIVER_INTERFACE_HPP

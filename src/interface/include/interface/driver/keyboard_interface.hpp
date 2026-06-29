@@ -7,8 +7,7 @@
  * Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef QUADRUPED_MOTION_KEYBOARD_INTERFACE_HPP
-#define QUADRUPED_MOTION_KEYBOARD_INTERFACE_HPP
+#pragma once
 
 #include <string>
 #include <functional>
@@ -107,4 +106,3 @@ class KeyboardInterface {
 };
 }  // namespace xmotion
 
-#endif  // QUADRUPED_MOTION_KEYBOARD_INTERFACE_HPP

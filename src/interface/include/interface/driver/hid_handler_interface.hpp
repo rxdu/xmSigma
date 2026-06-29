@@ -7,8 +7,7 @@
  * Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef QUADRUPED_MOTION_HID_HANDLER_INTERFACE_HPP
-#define QUADRUPED_MOTION_HID_HANDLER_INTERFACE_HPP
+#pragma once
 
 namespace xmotion {
 class HidInputInterface {
@@ -25,4 +24,3 @@ class HidInputInterface {
 };
 }  // namespace xmotion
 
-#endif  // QUADRUPED_MOTION_HID_HANDLER_INTERFACE_HPP

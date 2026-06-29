@@ -10,8 +10,7 @@
  * @copyright Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_MODBUS_RTU_INTERFACE_HPP
-#define XMOTION_MODBUS_RTU_INTERFACE_HPP
+#pragma once
 
 #include <string>
 
@@ -67,4 +66,3 @@ class ModbusRtuInterface {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_MODBUS_RTU_INTERFACE_HPP

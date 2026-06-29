@@ -8,8 +8,7 @@
  * Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_MOTOR_CONTROLLER_INTERFACE_HPP_
-#define XMOTION_MOTOR_CONTROLLER_INTERFACE_HPP_
+#pragma once
 
 #include <cstdint>
 #include <stdexcept>
@@ -66,4 +65,3 @@ class MotorControllerInterface {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_MOTOR_CONTROLLER_INTERFACE_HPP_

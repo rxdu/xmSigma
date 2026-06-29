@@ -6,8 +6,7 @@
  * @copyright Copyright (c) 2024 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_TRAJECTORY_TYPES_HPP
-#define XMOTION_TRAJECTORY_TYPES_HPP
+#pragma once
 
 #include "interface/type/geometry_types.hpp"
 
@@ -26,4 +25,3 @@ struct Trajectory3d {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_TRAJECTORY_TYPES_HPP

@@ -7,8 +7,7 @@
  * Copyright (c) 2021 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_IMU_INTERFACE_HPP
-#define XMOTION_IMU_INTERFACE_HPP
+#pragma once
 
 #include <string>
 
@@ -47,4 +46,3 @@ class ImuInterface {
 };
 }  // namespace xmotion
 
-#endif /* XMOTION_IMU_INTERFACE_HPP */

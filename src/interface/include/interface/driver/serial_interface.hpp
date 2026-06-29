@@ -7,8 +7,7 @@
  * Copyright (c) 2023 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_SERIAL_INTERFACE_HPP
-#define XMOTION_SERIAL_INTERFACE_HPP
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -35,4 +34,3 @@ class SerialInterface {
 };
 }  // namespace xmotion
 
-#endif  // XMOTION_SERIAL_INTERFACE_HPP

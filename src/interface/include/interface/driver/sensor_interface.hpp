@@ -7,8 +7,7 @@
  * Copyright (c) 2021 Ruixiang Du (rdu)
  */
 
-#ifndef XMOTION_SENSOR_INTERFACE_HPP
-#define XMOTION_SENSOR_INTERFACE_HPP
+#pragma once
 
 #include <string>
 #include <stdexcept>
@@ -48,4 +47,3 @@ class SensorInterface {
 };
 }  // namespace xmotion
 
-#endif /* XMOTION_SENSOR_INTERFACE_HPP */
